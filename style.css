@@ -1,0 +1,636 @@
+/* ============================================================
+   KAZ TRAVEL — style.css
+   Палитра (без изменений):
+     фон       #000000  (чёрный)
+     текст     #ffffff  (белый)
+     акцент    #2F80ED / #60A5FA (синий)
+     светлая полоса (band) #F3EEE4 с тёмным текстом #0A0A0A
+   ============================================================ */
+
+/* ---------- 1. Переменные и база ---------- */
+:root {
+  --bg: #000;
+  --ink: #fff;
+  --mute: #C8C2B4;
+  --line: #4A463E;
+  --acc: #2F80ED;
+  --acc-soft: #60A5FA;
+  --acc-outline: #93C5FD;
+  --on: #000;                 /* текст на синем фоне */
+  --band-bg: #F3EEE4;         /* светлая секция */
+  --band-ink: #0A0A0A;
+  --band-mute: #47433A;
+  --band-line: #A89F8A;
+  --band-acc: #2563EB;
+  --head: Oswald, "Arial Narrow", Arial, sans-serif;
+  --sans: Manrope, Arial, sans-serif;
+  --radius-lg: 26px;
+  --radius-md: 24px;
+  color-scheme: dark;
+  box-sizing: border-box;
+  padding-top: env(safe-area-inset-top, 0px);
+  padding-bottom: env(safe-area-inset-bottom, 0px);
+}
+
+*, *::before, *::after { box-sizing: inherit; }
+
+html {
+  scroll-behavior: smooth;
+  scroll-padding-top: env(safe-area-inset-top, 0px);
+}
+.logo {
+    width: 70px;
+    height: 70px;
+    object-fit: contain;
+}
+[hidden] { display: none !important; }
+
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--ink);
+  font: 400 16px/1.6 var(--sans);
+}
+
+/* Заливка зоны статус-бара на мобильных */
+body::before {
+  content: "";
+  position: fixed;
+  inset: 0 0 auto;
+  height: env(safe-area-inset-top, 0px);
+  z-index: 40;
+  background: var(--bg);
+}
+
+a { color: inherit; text-decoration: none; }
+button, input, textarea { font: inherit; color: inherit; }
+button { cursor: pointer; }
+img { display: block; max-width: 100%; }
+h1, h2, h3, p { margin: 0; }
+i { font-style: normal; }
+
+:focus-visible { outline: 2px solid var(--acc); outline-offset: 4px; }
+.btn:focus-visible, .cta:focus-visible, .fl button:focus-visible {
+  outline: 3px solid var(--acc-outline);
+}
+::selection { background: var(--acc); color: var(--on); }
+
+.g  { color: var(--acc); }
+.b2 { display: block; font-size: 13px; letter-spacing: 5.1px; margin-top: 3px; }
+
+/* ---------- 2. Шапка ---------- */
+header {
+  position: fixed;
+  z-index: 30;
+  top: 0; left: 0;
+  width: 100%;
+  min-height: 100px;
+  padding: env(safe-area-inset-top, 0px) 4% 0;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 20px;
+  border-bottom: 1px solid #ffffff30;
+  transition: background .3s, min-height .3s;
+}
+
+/* Сжатая шапка после скролла или на внутренних страницах */
+header.s {
+  min-height: 82px;
+  background: #000000ee;
+  backdrop-filter: blur(16px);
+}
+
+.brand {
+  display: flex;
+  gap: 12px;
+  align-items: center;
+  line-height: 1.05;
+  font-size: 17px;
+  font-weight: 800;
+  letter-spacing: 2px;
+}
+
+/* Логотип — синий всегда (и в тёмной, и в светлой теме) */
+.brand svg { width: 42px; height: 42px; color: var(--acc); flex: none; }
+
+header nav { display: flex; gap: 30px; font-size: 13px; font-weight: 600; }
+header nav a { position: relative; padding: 12px 0; }
+
+/* Подчёркивание пункта меню */
+header nav a::after {
+  content: "";
+  position: absolute;
+  bottom: 3px; left: 0;
+  width: 100%; height: 1px;
+  background: var(--acc);
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform .25s;
+}
+header nav a:hover::after,
+header nav a[aria-current]::after { transform: scaleX(1); }
+
+.cta {
+  font-size: 12px;
+  font-weight: 800;
+  border: 1px solid #ffffff90;
+  padding: 14px 22px;
+  border-radius: 999px;
+  transition: background .25s, color .25s, border-color .25s;
+}
+.cta:hover { background: var(--acc); border-color: var(--acc); color: var(--on); }
+
+.menu { display: none; background: none; border: 0; font-size: 26px; line-height: 1; }
+
+/* ---------- 3. Кнопки ---------- */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 36px;
+  background: var(--acc);
+  border: 1px solid var(--acc);
+  color: var(--on);
+  font-size: 13px;
+  font-weight: 800;
+  padding: 18px 28px;
+  min-height: 56px;
+  border-radius: 999px;
+  transition: background .25s, transform .25s;
+}
+.btn:hover { background: var(--acc-soft); transform: translateY(-3px); }
+.btn i { font-size: 22px; font-weight: 400; line-height: 1; }
+
+/* Прозрачная кнопка-контур */
+.btn.o {
+  background: transparent;
+  border-color: #8a8678;
+  color: var(--ink);
+}
+.btn.o:hover { background: var(--acc); border-color: var(--acc); color: var(--on); }
+
+/* ---------- 4. Hero (главный экран) ---------- */
+.hero {
+  min-height: 760px;
+  height: 100svh;
+  max-height: 1100px;
+  position: relative;
+  isolation: isolate;
+  overflow: hidden;
+  background: #101517;
+}
+
+.hero .ph {
+  position: absolute;
+  inset: 0;
+  width: 100%; height: 100%;
+  object-fit: cover;
+  object-position: 60% 50%;
+  z-index: -2;
+}
+
+/* Затемнение поверх фото */
+.shade {
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  background:
+    linear-gradient(90deg, #000000ea 0%, #00000060 58%, #00000030),
+    linear-gradient(0deg, #000 0%, transparent 40%, #00000018 70%);
+}
+
+.hero-copy { padding: 174px 0 0 7%; max-width: 1000px; }
+.kicker { font-size: 15px; font-weight: 500; color: #e2dcd2; }
+
+.hero h1 {
+  font: 500 clamp(64px, 7.4vw, 112px)/1.14 var(--head);
+  letter-spacing: -1px;
+  margin: 24px 0 30px;
+}
+
+.hero-copy p {
+  font-size: 15px;
+  color: #d6d1c6;
+  line-height: 1.9;
+  margin-bottom: 28px;
+  max-width: 34rem;
+}
+
+/* Появление текста при загрузке */
+@keyframes up { from { opacity: 0; transform: translateY(24px); } }
+.hero-copy > * { animation: up .8s cubic-bezier(.2,.7,.2,1) both; }
+.hero-copy > :nth-child(2) { animation-delay: .12s; }
+.hero-copy > :nth-child(3) { animation-delay: .28s; }
+
+@media (prefers-reduced-motion: reduce) {
+  .hero-copy > * { animation: none; }
+  html { scroll-behavior: auto; }
+}
+
+/* ---------- 5. Секции общие ---------- */
+.sec { padding: 90px 7%; }
+
+.head {
+  display: flex;
+  align-items: end;
+  justify-content: space-between;
+  gap: 30px;
+  margin-bottom: 44px;
+  border-top: 1px solid var(--line);
+  padding-top: 36px;
+}
+
+h2 {
+  font: 600 clamp(35px, 4vw, 64px)/1.12 var(--sans);
+  letter-spacing: -2px;
+}
+
+.head p { font-size: 14px; line-height: 1.9; color: var(--mute); max-width: 320px; }
+
+/* Светлая секция (услуги, «о нас»): меняем палитру локально */
+.band {
+  --bg: var(--band-bg);
+  --ink: var(--band-ink);
+  --mute: var(--band-mute);
+  --line: var(--band-line);
+  --acc: var(--band-acc);
+  --on: #fff;
+  background: var(--bg);
+  color: var(--ink);
+}
+.band .btn.o { border-color: var(--band-ink); }
+
+/* ---------- 6. Большие карточки-направления ---------- */
+.exp { display: grid; grid-template-columns: 1.3fr 1fr 1fr; gap: 18px; }
+
+.xc {
+  position: relative;
+  isolation: isolate;
+  height: 440px;
+  overflow: hidden;
+  border-radius: var(--radius-lg);
+  background: #222;
+}
+
+.xc img {
+  height: 100%; width: 100%;
+  object-fit: cover;
+  filter: saturate(.9) contrast(1.05);
+  transition: transform 1s, filter .8s;
+}
+.xc:hover img { transform: scale(1.06); filter: saturate(1.15) contrast(1.05); }
+
+.xc::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(0deg, #000d, transparent 70%);
+}
+
+.xc div {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: end;
+  padding: 28px;
+}
+.xc h3 { font: 500 27px/1.2 var(--sans); letter-spacing: -1px; }
+
+/* ---------- 7. Сетка экскурсий ---------- */
+.tg {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 48px 24px;
+}
+
+.tc { display: block; min-width: 0; }
+
+.ci {
+  position: relative;
+  aspect-ratio: 1.28;
+  overflow: hidden;
+  border-radius: var(--radius-md);
+  background: #242424;
+}
+
+.ci img {
+  width: 100%; height: 100%;
+  object-fit: cover;
+  filter: saturate(.95) contrast(1.05);
+  transition: transform .8s, filter .6s;
+}
+.tc:hover .ci img { transform: scale(1.06); filter: saturate(1.2) contrast(1.05); }
+
+/* Метка категории на фото */
+.tag {
+  position: absolute;
+  left: 14px; bottom: 14px;
+  font-size: 11px;
+  font-weight: 700;
+  background: #000000b8;
+  backdrop-filter: blur(8px);
+  padding: 6px 14px;
+  border-radius: 999px;
+}
+
+.cc { padding-top: 20px; }
+.cc h3 { font: 600 20px/1.35 var(--sans); letter-spacing: -.5px; }
+
+.cc p {
+  color: var(--mute);
+  font-size: 14px;
+  line-height: 1.7;
+  margin-top: 10px;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+/* Нижняя строка карточки */
+.tl {
+  font-size: 12px;
+  font-weight: 700;
+  display: flex;
+  justify-content: space-between;
+  margin-top: 18px;
+  border-bottom: 1px solid var(--line);
+  padding-bottom: 14px;
+}
+.tc:hover .tl { color: var(--acc); border-color: var(--acc); }
+
+/* Кнопка «Все экскурсии» по центру */
+.more { display: flex; width: fit-content; margin: 52px auto 0; }
+
+/* ---------- 8. Промо-баннер «свой маршрут» ---------- */
+.man {
+  position: relative;
+  isolation: isolate;
+  min-height: 600px;
+  display: flex;
+  align-items: center;
+  padding: 90px 7%;
+  overflow: hidden;
+}
+
+.man .ph {
+  position: absolute;
+  inset: 0;
+  z-index: -2;
+  width: 100%; height: 100%;
+  object-fit: cover;
+  object-position: center 60%;
+  filter: brightness(.7) contrast(1.1);
+}
+
+.man .shade {
+  background:
+    linear-gradient(90deg, #000c, transparent),
+    linear-gradient(0deg, #00000070, transparent);
+}
+
+.man h2 {
+  font-size: clamp(36px, 5vw, 68px);
+  font-weight: 500;
+  line-height: 1.17;
+  letter-spacing: -2px;
+  margin-bottom: 24px;
+}
+.man p { font-size: 15px; line-height: 1.8; color: #e0dacf; margin-bottom: 30px; max-width: 30rem; }
+
+/* ---------- 9. Услуги ---------- */
+.sv { border-top: 1px solid var(--line); }
+
+.sr {
+  display: flex;
+  align-items: center;
+  gap: 30px;
+  border-bottom: 1px solid var(--line);
+  padding: 26px 4px;
+  transition: padding .3s, color .3s;
+}
+.sr h3 { font: 500 clamp(18px, 2.2vw, 26px) var(--sans); letter-spacing: -.5px; flex: 1; }
+.sr span { font-size: 13px; color: var(--mute); }
+.sr i { font-size: 26px; line-height: 1; }
+.sr:hover { padding-left: 22px; color: var(--acc); }
+
+/* ---------- 10. Шапки внутренних страниц ---------- */
+.top { padding: 150px 7% 80px; min-height: 70vh; }
+
+.top h1 {
+  font: 600 clamp(48px, 7vw, 100px)/1.1 var(--sans);
+  letter-spacing: -4px;
+  margin: 0 0 24px;
+}
+
+.lead { color: var(--mute); font-size: 17px; line-height: 1.9; max-width: 38rem; margin-bottom: 40px; }
+
+/* Панель инструментов: фильтры + поиск */
+.tools {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 25px;
+  flex-wrap: wrap;
+  padding: 24px 0;
+  border-top: 1px solid var(--line);
+  border-bottom: 1px solid var(--line);
+}
+
+.fl { display: flex; gap: 10px; flex-wrap: wrap; }
+.fl button {
+  background: none;
+  border: 1px solid var(--line);
+  padding: 11px 20px;
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--mute);
+  border-radius: 999px;
+  transition: background .2s, color .2s;
+}
+.fl button:hover { color: var(--ink); border-color: var(--ink); }
+.fl button[aria-pressed="true"] { background: var(--acc); border-color: var(--acc); color: var(--on); }
+
+.search input {
+  width: 220px;
+  background: transparent;
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  padding: 11px 20px;
+  font-size: 14px;
+}
+
+/* Строка «найдено N экскурсий» */
+.res { color: var(--mute); font-size: 13px; margin: 24px 0; }
+
+/* ---------- 11. Страница экскурсии ---------- */
+.back { display: inline-block; color: var(--mute); margin-bottom: 24px; font-size: 14px; }
+.back:hover { color: var(--ink); }
+
+.dh {
+  height: min(48vw, 460px);
+  overflow: hidden;
+  margin: 36px 0 12px;
+  border-radius: 28px;
+  background: #191919;
+}
+.dh img { width: 100%; height: 100%; object-fit: cover; }
+
+/* Подпись к фото на странице экскурсии */
+.cap {
+  color: var(--mute);
+  font-size: 13px;
+  line-height: 1.7;
+  margin: 0 0 44px;
+  padding-left: 16px;
+  border-left: 2px solid var(--acc);
+}
+
+.dl {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 300px;
+  gap: 64px;
+  align-items: start;
+}
+
+.pr { font-size: 16px; line-height: 1.9; color: #e4dfd4; }
+.pr p { margin-bottom: 20px; }
+.pr h3 { font: 600 24px var(--sans); letter-spacing: -.5px; color: var(--ink); margin: 0 0 16px; }
+
+/* Боковая карточка «Хотите поехать?» */
+.as {
+  position: sticky;
+  top: 110px;
+  background: #161616;
+  border-top: 2px solid var(--acc);
+  border-radius: var(--radius-md);
+  padding: 28px;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+.as h2 { font-size: 28px; letter-spacing: -1px; }
+.as p { font-size: 14px; line-height: 1.8; color: var(--mute); }
+.as .btn { width: 100%; }
+.as a.l { font-size: 14px; font-weight: 600; }
+.as a.l:hover { color: var(--acc); }
+
+/* ---------- 12. «О нас» ---------- */
+.fc { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 24px; margin-top: 8px; }
+.fc div { border: 1px solid var(--line); border-radius: var(--radius-lg); padding: 28px; }
+.fc h3 { font: 600 21px var(--sans); letter-spacing: -.5px; margin-bottom: 8px; }
+.fc p { color: var(--mute); font-size: 15px; line-height: 1.7; }
+
+/* ---------- 13. Контакты и форма ---------- */
+.og {
+  display: grid;
+  grid-template-columns: 1.1fr 1fr;
+  gap: clamp(36px, 6vw, 80px);
+  align-items: start;
+}
+
+.cl { display: block; margin: 14px 0; font-size: 17px; }
+.cl:hover { color: var(--acc); }
+.cl small { display: block; font-size: 12px; color: var(--mute); }
+
+.inq {
+  background: #151515;
+  border-top: 2px solid var(--acc);
+  border-radius: 28px;
+  padding: clamp(22px, 3vw, 36px);
+  display: flex;
+  flex-direction: column;
+  gap: 22px;
+}
+.inq label { display: flex; flex-direction: column; gap: 10px; font-size: 13px; color: var(--mute); }
+.inq input, .inq textarea {
+  width: 100%;
+  background: none;
+  border: 1px solid var(--line);
+  border-radius: 16px;
+  color: var(--ink);
+  padding: 13px 18px;
+  font-size: 15px;
+  resize: vertical;
+}
+.inq input:hover, .inq textarea:hover { border-color: var(--mute); }
+.note { font-size: 12px; color: var(--mute); line-height: 1.7; }
+
+/* ---------- 14. Подвал ---------- */
+footer {
+  padding: 60px 7% 24px;
+  border-top: 1px solid var(--line);
+  background: #0c0c0c;
+}
+
+.fg {
+  display: grid;
+  grid-template-columns: 1.3fr 1fr 1fr 1fr;
+  gap: 30px;
+  margin-top: 36px;
+  padding-top: 36px;
+  border-top: 1px solid var(--line);
+}
+.fg > div { display: flex; flex-direction: column; gap: 10px; font-size: 14px; }
+.fg b { font-size: 12px; color: var(--mute); font-weight: 600; }
+.fg a:hover { color: var(--acc); }
+
+.fb {
+  margin-top: 36px;
+  padding-top: 20px;
+  border-top: 1px solid var(--line);
+  display: flex;
+  justify-content: space-between;
+  gap: 20px;
+  font-size: 12px;
+  color: var(--mute);
+}
+
+/* ---------- 15. Адаптив ---------- */
+@media (max-width: 1000px) {
+  .tg { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .exp { grid-template-columns: 1fr 1fr; }
+  .exp .xc:first-child { grid-column: 1 / -1; }
+  .dl, .og { grid-template-columns: 1fr; }
+  .as { position: static; }
+}
+
+@media (max-width: 900px) {
+  header nav { display: none; }
+  .menu { display: block; }
+
+  /* Выпадающее меню бургера */
+  header.o nav {
+    display: flex;
+    position: absolute;
+    top: 100%; left: 0; right: 0;
+    flex-direction: column;
+    gap: 4px;
+    background: #000;
+    padding: 16px 4% 28px;
+    font-size: 20px;
+    border-bottom: 1px solid var(--line);
+  }
+  .cta { display: none; }
+  .fg { grid-template-columns: 1fr 1fr; }
+}
+
+@media (max-width: 640px) {
+  .sec { padding: 64px 6%; }
+  .hero { min-height: 700px; height: 92svh; }
+  .hero-copy { padding: 150px 6% 0; }
+  .hero h1 { font-size: clamp(52px, 13vw, 76px); }
+  .btn { gap: 20px; padding: 16px 22px; }
+
+  .tg, .exp { grid-template-columns: 1fr; }
+  .xc { height: 340px; }
+  .head { flex-direction: column; align-items: start; }
+  .fg { grid-template-columns: 1fr; }
+  .fb { flex-direction: column; }
+  .sr span { display: none; }
+  .search { width: 100%; }
+  .search input { width: 100%; }
+}

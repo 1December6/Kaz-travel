@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#0B1220">
+<title>Kaz Travel</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&family=Oswald:wght@500;600;700&display=swap" rel="stylesheet"> 
+<link rel="stylesheet" href="style.css">
+<base target="_blank">
+</head>
+<body>
+
+<!-- ======================= ШАПКА ======================= -->
+<header id="hd">
+  <a class="brand" href="#home" aria-label="Kaz Travel — на главную">
+    <!-- Логотип: синий значок с горами и солнцем -->
+    <img src="image/Минималистичный_логотип_горного_маршрута-removebg-preview.png" alt="Логотип" class="logo">
+    <span>KAZ<span class="b2">TRAVEL</span></span>
+  </a>
+
+  <nav id="nv">
+    <a href="#tours">Экскурсии</a>
+    <a href="#services">Услуги</a>
+    <a href="#about">О нас</a>
+    <a href="#contacts">Контакты</a>
+  </nav>
+
+  <a class="cta" href="#contacts" id="cta">ОСТАВИТЬ ЗАЯВКУ</a>
+  <button class="menu" id="mb" aria-label="Меню" aria-expanded="false">☰</button>
+</header>
+
+<main>
+
+  <!-- ======================= ГЛАВНАЯ ======================= -->
+  <div class="pg" id="p-home">
+
+    <section class="hero">
+       <img class="ph" data-i="hero" alt="Шым"> 
+      <div class="shade"></div>
+      <div class="hero-copy">
+        <p class="kicker">Экскурсии по Алматы и Казахстану</p>
+        <h1>Алматы<br>и <span class="g">Шымбулак.</span></h1>
+        <div>
+          <p>Шымбулаки другие туристические места. Выберите маршрут — организацию поездки возьмём на себя.</p>
+          <a class="btn" href="#tours">Выбрать экскурсию <i>→</i></a>
+        </div>
+      </div>
+    </section>
+
+    <section class="sec">
+      <div class="head">
+        <h2>Что хотите увидеть?</h2>
+        <p>Однодневные экскурсии и поездки с ночёвкой. Горы, озёра и город — в любое время года.</p>
+      </div>
+      <div class="exp">
+        <a class="xc" href="#tours" data-f="nature">
+          <img data-i="t54" alt="Нижнее Кольсайское озеро среди тянь-шанской ели и осенних кустарников" loading="lazy">
+          <div><h3>Озёра и каньоны</h3></div>
+        </a>
+        <a class="xc" href="#tours" data-f="winter">
+          <img data-i="t23" alt="Кресельный подъёмник Шымбулака среди заснеженных елей" loading="lazy">
+          <div><h3>Горнолыжные курорты</h3></div>
+        </a>
+        <a class="xc" href="#tour-50">
+          <img data-i="t50" alt="Панорама Алматы и телебашня на зелёном холме Кок-Тобе" loading="lazy">
+          <div><h3>Знакомство с Алматы</h3></div>
+        </a>
+      </div>
+    </section>
+
+    <section class="sec" style="padding-top:0">
+      <div class="head">
+        <h2>Популярные экскурсии</h2>
+        <p>Маршруты, с которых чаще всего начинают знакомство с Казахстаном.</p>
+      </div>
+      <div class="tg" id="hf"></div>
+      <a class="btn o more" href="#tours">Все экскурсии <i>→</i></a>
+    </section>
+
+    <section class="man">
+      <img class="ph" data-i="man" alt="Вечерняя подсветка трасс горнолыжного курорта Шымбулак на фоне заката" loading="lazy">
+      <div class="shade"></div>
+      <div>
+        <h2>Поездка<br>по вашему маршруту</h2>
+        <p>Хотите совместить несколько мест или поехать своей компанией? Обсудим маршрут, транспорт и проживание.</p>
+        <a class="btn" href="#contacts">Обсудить маршрут <i>→</i></a>
+      </div>
+    </section>
+
+    <section class="sec band">
+      <div class="head">
+        <h2>Услуги</h2>
+        <p>Всё, что нужно в поездке, от трансфера до вертолётной прогулки.</p>
+      </div>
+      <div class="sv" id="hs"></div>
+      <a class="btn o more" href="#services">Все услуги <i>→</i></a>
+    </section>
+
+  </div>
+
+  <!-- ======================= ЭКСКУРСИИ ======================= -->
+  <div class="pg" id="p-tours" hidden>
+    <div class="top">
+      <h1>Экскурсии</h1>
+      <p class="lead">Горы, озёра, каньоны и город: маршруты из Алматы и по всему Казахстану.</p>
+      <div class="tools">
+        <div class="fl" role="group" aria-label="Фильтр экскурсий">
+          <button data-c="all" aria-pressed="true">Все</button>
+          <button data-c="nature" aria-pressed="false">Природа</button>
+          <button data-c="city" aria-pressed="false">Город</button>
+          <button data-c="winter" aria-pressed="false">Горные курорты</button>
+        </div>
+        <label class="search">
+          <input id="q" type="search" placeholder="Поиск по названию" aria-label="Поиск по названию">
+        </label>
+      </div>
+      <p class="res" id="rs"></p>
+      <div class="tg" id="tl"></div>
+    </div>
+  </div>
+
+  <!-- ======================= СТРАНИЦА ЭКСКУРСИИ ======================= -->
+  <div class="pg" id="p-tour" hidden>
+    <div class="top" id="td"></div>
+  </div>
+
+  <!-- ======================= УСЛУГИ ======================= -->
+  <div class="pg" id="p-services" hidden>
+    <div class="top">
+      <h1>Услуги</h1>
+      <p class="lead">Дополнительные услуги к экскурсиям. Нажмите на нужную, и мы подготовим заявку.</p>
+      <div class="sv" id="sl"></div>
+    </div>
+  </div>
+
+  <!-- ======================= О НАС ======================= -->
+  <div class="pg" id="p-about" hidden>
+    <div class="top" style="min-height:0;padding-bottom:70px">
+      <h1>О нас</h1>
+      <p class="lead">Kazakhstan Travel Agency знакомит гостей с Алматы, его известными местами и природой вокруг города: горами, озёрами и каньонами.</p>
+      <p class="lead" style="margin:0">Мы делаем ставку на высокий уровень обслуживания и чёткую организацию поездки: вы выбираете маршрут, остальное берём на себя.</p>
+    </div>
+    <section class="sec band">
+      <div class="fc">
+        <div>
+          <h3>14 маршрутов</h3>
+          <p>Горы, озёра, каньоны, город и горнолыжные курорты из Алматы и по Казахстану.</p>
+        </div>
+        <div>
+          <h3>Услуги в поездке</h3>
+          <p>Трансферы, переводчик, гостиницы, вертолёты, багги и верховая езда.</p>
+        </div>
+        <div>
+          <h3>Индивидуально</h3>
+          <p>Поедем своей компанией по вашему маршруту: обсудим транспорт и проживание.</p>
+        </div>
+      </div>
+    </section>
+  </div>
+
+  <!-- ======================= КОНТАКТЫ / ЗАЯВКА ======================= -->
+  <div class="pg" id="p-contacts" hidden>
+    <div class="top">
+      <div class="og">
+        <div>
+          <h1>Заявка</h1>
+          <p class="lead">Напишите, куда хотите поехать и когда. Мы подготовим сообщение для WhatsApp, отправьте его сами.</p>
+          <a class="cl" href="https://wa.me/77775259885" target="_blank" rel="noopener"><small>WhatsApp, Артур</small>+7 (777) 525-98-85</a>
+          <a class="cl" href="tel:+77273280429"><small>Телефон и факс</small>+7 (727) 328-04-29</a>
+          <a class="cl" href="mailto:kztravel@mail.ru"><small>Почта</small>kztravel@mail.ru</a>
+          <p class="cl"><small>Адрес</small>Алматы, пр. Достык 103/10, офис 4</p>
+        </div>
+        <form class="inq" id="f">
+          <label>Имя<input name="n" required autocomplete="name"></label>
+          <label>Телефон или мессенджер<input name="p" required autocomplete="tel"></label>
+          <label>Пожелания<textarea name="w" id="wish" rows="4"></textarea></label>
+          <p class="note">Форма не отправляется на сервер: она открывает WhatsApp с готовым текстом.</p>
+          <button class="btn" type="submit">Написать в WhatsApp <i>→</i></button>
+        </form>
+      </div>
+    </div>
+  </div>
+
+</main>
+
+<!-- ======================= ПОДВАЛ ======================= -->
+<footer>
+  <a class="brand" href="#home" aria-label="Kaz Travel — на главную">
+    <svg viewBox="0 0 48 48" aria-hidden="true">
+      <rect x="2.5" y="2.5" width="43" height="43" rx="12" fill="none" stroke="currentColor" stroke-width="2.6"/>
+      <path d="M10 33.5 20.5 17l5 7.5 3.5-4.5L38 33.5z" fill="currentColor"/>
+      <circle cx="32.5" cy="14.5" r="3.2" fill="currentColor"/>
+    </svg>
+    <span>KAZ<span class="b2">TRAVEL</span></span>
+  </a>
+
+  <div class="fg">
+    <div>
+      <b>Kazakhstan Travel Agency</b>
+      <span>Экскурсии по Алматы и Казахстану.</span>
+    </div>
+    <div>
+      <b>Разделы</b>
+      <a href="#tours">Экскурсии</a>
+      <a href="#services">Услуги</a>
+      <a href="#about">О нас</a>
+    </div>
+    <div>
+      <b>Контакты</b>
+      <a href="https://wa.me/77775259885" target="_blank" rel="noopener">+7 (777) 525-98-85</a>
+      <a href="mailto:kztravel@mail.ru">kztravel@mail.ru</a>
+    </div>
+    <div>
+      <b>Адрес</b>
+      <span>Алматы, пр. Достык 103/10, офис 4</span>
+      <span>Instagram: kazakhstan_travel</span>
+    </div>
+  </div>
+
+  <div class="fb">
+    <span>© 2026 Kazakhstan Travel Agency</span>
+    <span>Условия поездки уточняйте у менеджера.</span>
+  </div>
+</footer>
+
+<script src="script.js" defer></script>
+</body>
+</html>
